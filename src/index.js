@@ -52,9 +52,7 @@ class Game  extends React.Component {
             locations: Array(9).fill(null),
             stepNumber: 0,
             xIsNext: true,
-            rowSize:3,
-            colSize:3,
-        };
+         };
     }
     jumpTo(step) {
         this.setState({
