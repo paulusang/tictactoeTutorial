@@ -10,6 +10,7 @@ function Square(props) {
         </button>
     );
 }
+
 class Board extends React.Component {
     renderSquare(i) {
         return (
@@ -19,25 +20,24 @@ class Board extends React.Component {
             />
         );
     }
+    createDiv =() => {
+        let div=[]
+        for (let i=0;i<3;i++) {
+            let squares=[]
+            for (let j=0;j<3;j++){
+                squares.push(
+                    this.renderSquare(i*3+j)
+                    )
+            }
+            div.push(<div>{squares}</div>)
+        }
+        return div
+     }
 
     render() {
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {this.createDiv()}
             </div>
         );
     }
@@ -52,6 +52,8 @@ class Game  extends React.Component {
             locations: Array(9).fill(null),
             stepNumber: 0,
             xIsNext: true,
+            rowSize:3,
+            colSize:3,
         };
     }
     jumpTo(step) {
