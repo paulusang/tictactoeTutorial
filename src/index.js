@@ -15,6 +15,7 @@ class Board extends React.Component {
     renderSquare(i) {
         return (
             <Square 
+                key={"square "+i}
                 value={this.props.squares[i]} 
                 onClick={() => this.props.onClick(i)}
             />
@@ -52,6 +53,7 @@ class Game  extends React.Component {
             locations: Array(9).fill(null),
             stepNumber: 0,
             xIsNext: true,
+            isDescending: true,
          };
     }
     jumpTo(step) {
@@ -79,6 +81,11 @@ class Game  extends React.Component {
         xIsNext: !this.state.xIsNext,
         });
     }
+    sortHistory() {
+        this.setState({
+            isDescending: !this.state.isDescending
+        });
+    }
 
     render() {
         const history=this.state.history;
@@ -91,7 +98,7 @@ class Game  extends React.Component {
               'Go to game start';
             
               return (
-                  <li key={move}>
+                  <li key={move} id={move}>
                       <button onClick={() => this.jumpTo(move)}>
                       {move === this.state.stepNumber?<b>{desc}</b>:desc}
                       </button>
@@ -116,7 +123,10 @@ class Game  extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <ol>{this.state.isDescending?moves:moves.reverse()}</ol>
+                    <button onClick={()=>this.sortHistory()}>
+                        Sort by: {this.state.isDescending?"Descending" : "Ascending"}
+                    </button>
                 </div>
             </div>
         )
