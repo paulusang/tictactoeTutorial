@@ -27,6 +27,10 @@ ol, ul {
   text-align: center;
   width: 34px;
 }
+.squareWinner {
+  background: #ff0;
+  font-weight: bold;
+}
 .square:focus {
   outline: none;
 }
